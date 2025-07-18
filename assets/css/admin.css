@@ -1,0 +1,301 @@
+    :root {
+        --primary-color: #6f42c1;
+        /* A vibrant purple */
+        --secondary-color: #e9ecef;
+        /* Light grey for background */
+        --accent-color: #8a2be2;
+        /* A slightly darker purple for hover */
+        --text-color: #343a40;
+        /* Dark grey for general text */
+        --light-text-color: #6c757d;
+        /* Lighter grey for secondary text */
+        --dashboard-bg: #f8f9fa;
+        /* Lighter background for dashboard content */
+    }
+
+    body {
+        font-family: 'Poppins', sans-serif;
+        min-height: 100vh;
+        background-color: var(--dashboard-bg);
+        /* Consistent light background */
+        color: var(--text-color);
+        display: flex;
+        /* Use flexbox for main layout */
+    }
+
+    /* Sidebar Styling */
+    .sidebar {
+        width: 250px;
+        background: linear-gradient(180deg, var(--primary-color) 0%, var(--accent-color) 100%);
+        color: white;
+        padding: 20px;
+        position: fixed;
+        /* Fixed sidebar */
+        height: 100%;
+        overflow-y: auto;
+        /* Scrollable if content overflows */
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        transition: all 0.3s ease;
+        z-index: 1000;
+        /* Ensure it's above other content */
+        left: 0;
+        /* Default to visible for desktop, will be hidden by JS on mobile */
+    }
+
+    .sidebar.collapsed {
+        width: 70px;
+        /* Collapsed width */
+    }
+
+    .sidebar .logo {
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: white;
+        text-decoration: none;
+        display: block;
+    }
+
+    .sidebar.collapsed .logo span {
+        display: none;
+        /* Hide text when collapsed */
+    }
+
+    .sidebar ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .sidebar ul li {
+        margin-bottom: 10px;
+    }
+
+    .sidebar ul li a {
+        display: flex;
+        align-items: center;
+        padding: 12px 15px;
+        color: rgba(255, 255, 255, 0.8);
+        text-decoration: none;
+        border-radius: 0.5rem;
+        transition: all 0.3s ease;
+    }
+
+    .sidebar ul li a:hover,
+    .sidebar ul li a.active {
+        background-color: rgba(255, 255, 255, 0.2);
+        color: white;
+        transform: translateX(5px);
+    }
+
+    .sidebar ul li a i {
+        margin-right: 15px;
+        font-size: 1.2rem;
+        width: 25px;
+        /* Fixed width for icons */
+        text-align: center;
+    }
+
+    .sidebar.collapsed ul li a span {
+        display: none;
+        /* Hide text when collapsed */
+    }
+
+    .sidebar.collapsed ul li a {
+        justify-content: center;
+        /* Center icon when collapsed */
+        padding: 12px 0;
+    }
+
+    /* Main Content Area */
+    .main-content {
+        margin-left: 250px;
+        /* Space for sidebar */
+        flex-grow: 1;
+        padding: 30px;
+        transition: margin-left 0.3s ease;
+    }
+
+    .main-content.shifted {
+        margin-left: 70px;
+        /* Adjusted margin when sidebar is collapsed */
+    }
+
+    /* Navbar (Top Bar) */
+    .navbar {
+        background-color: white;
+        border-radius: 0.75rem;
+        box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.05);
+        margin-bottom: 30px;
+        padding: 15px 25px;
+    }
+
+    .navbar .navbar-brand {
+        font-weight: 600;
+        color: var(--primary-color);
+    }
+
+    .navbar .btn-toggle-sidebar {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+        color: white;
+        border-radius: 0.5rem;
+        padding: 8px 12px;
+        transition: all 0.3s ease;
+    }
+
+    .navbar .btn-toggle-sidebar:hover {
+        background-color: var(--accent-color);
+        border-color: var(--accent-color);
+    }
+
+    /* Dashboard Cards */
+    .dashboard-card {
+        background: white;
+        border-radius: 0.75rem;
+        box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.05);
+        padding: 25px;
+        margin-bottom: 25px;
+        transition: all 0.3s ease;
+    }
+
+    .dashboard-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
+    }
+
+    .dashboard-card h5 {
+        font-weight: 600;
+        color: var(--primary-color);
+        margin-bottom: 15px;
+    }
+
+    .dashboard-card .card-icon {
+        font-size: 2.5rem;
+        color: var(--primary-color);
+        opacity: 0.7;
+        margin-bottom: 15px;
+    }
+
+    .dashboard-card .card-value {
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: var(--text-color);
+    }
+
+    .dashboard-card .card-text {
+        color: var(--light-text-color);
+    }
+
+    /* Progress Bar Styling */
+    .progress-bar {
+        background-color: var(--primary-color);
+        border-radius: 0.5rem;
+    }
+
+    /* Table Styling */
+    .table {
+        border-radius: 0.75rem;
+        overflow: hidden;
+        /* Ensures rounded corners on table */
+    }
+
+    .table thead th {
+        background-color: var(--primary-color);
+        color: white;
+        font-weight: 600;
+        border-bottom: none;
+    }
+
+    .table tbody tr:nth-child(even) {
+        background-color: var(--secondary-color);
+    }
+
+    .table tbody tr:hover {
+        background-color: rgba(111, 66, 193, 0.1);
+        /* Light hover effect */
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        body.sidebar-open-mobile {
+            overflow: hidden;
+            /* Prevent scrolling when mobile sidebar is open */
+        }
+
+        .sidebar {
+            width: 250px;
+            /* Full width for overlay */
+            left: -250px;
+            /* Hidden by default */
+            transform: translateX(0);
+            /* Reset transform */
+        }
+
+        .sidebar.show {
+            /* Class to show sidebar on mobile */
+            left: 0;
+        }
+
+        .sidebar.collapsed {
+            /* Ensure collapsed state works if user resizes from desktop */
+            width: 70px;
+            left: -70px;
+        }
+
+        .sidebar.collapsed.show {
+            left: 0;
+        }
+
+        .main-content {
+            margin-left: 0;
+            /* No margin on mobile by default */
+            padding: 15px;
+        }
+
+        .main-content.shifted {
+            /* This class will be removed on mobile, as sidebar will be overlay */
+            margin-left: 0;
+        }
+
+        .navbar .btn-toggle-sidebar {
+            display: block !important;
+            /* Ensure mobile toggle is always visible on small screens */
+        }
+
+        .navbar .btn-toggle-sidebar.d-lg-none {
+            display: block !important;
+        }
+
+        .navbar .btn-toggle-sidebar.d-none.d-lg-block {
+            display: none !important;
+        }
+    }
+
+    /* Backdrop for mobile sidebar */
+    .sidebar-backdrop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        /* Below sidebar, above content */
+        display: none;
+        /* Hidden by default */
+    }
+
+    .sidebar-backdrop.show {
+        display: block;
+    }
+
+    /* Content sections initially hidden, only active one shows */
+    .content-section {
+        display: none;
+    }
+
+    .content-section.active {
+        display: block;
+    }
